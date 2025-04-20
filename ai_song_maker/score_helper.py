@@ -1,10 +1,13 @@
 import re
 from fractions import Fraction
 
+from music21 import environment
 from music21 import stream, note, chord, meter, key, tempo, clef, instrument, pitch, duration, tie, dynamics
 from music21.note import GeneralNote
 import random
 from collections import deque
+
+
 
 import os
 import shutil
@@ -34,6 +37,10 @@ def move_music_files_to_archive(directory, archive_directory='/Users/simjuheun/D
 
 def process_and_output_score(parts_data, score_data, musicxml_path='./output/song_musicxml.xml',
                              midi_path='./output/song_midi.mid', show_html=True, sheet_music_html_path='/mnt/data/sheet_music.html'):
+    us = environment.UserSettings()
+    us['musicxmlPath'] = '/Applications/MuseScore 4.app/Contents/MacOS/mscore'
+    us['musescoreDirectPNGPath'] = '/Applications/MuseScore 4.app/Contents/MacOS/mscore'
+
     try:
         directory = os.path.dirname(musicxml_path)
         move_music_files_to_archive(directory)
@@ -316,8 +323,13 @@ def process_and_output_score(parts_data, score_data, musicxml_path='./output/son
 
     # Write the score to MusicXML and MIDI files
     score.write('musicxml', fp=musicxml_path)
-    #score.write('musicxml.pdf', fp='./output/song_score.pdf')
     score.write('midi', fp=midi_path)
+
+    # 🎁 PDF 악보 저장 추가
+    pdf_path = './output/song_score.pdf'
+    score.write('musicxml.pdf', fp=pdf_path)
+
+    print(f"🎼 PDF 악보 저장됨: {pdf_path}")
 
     print("Fix warning or error messages printed above next time. If Any.")
     print("Ask user for feedback or to continue on with the next section (if applicable).")
