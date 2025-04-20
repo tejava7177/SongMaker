@@ -11,7 +11,7 @@ import shutil
 import time
 
 
-def move_music_files_to_archive(directory, archive_directory='/mnt/data/midi_musicXML_archive'):
+def move_music_files_to_archive(directory, archive_directory='/Users/simjuheun/Desktop/myProject/SongMaker/output'):
     # Ensure the archive directory exists, if not, create it
     if not os.path.exists(archive_directory):
         os.makedirs(archive_directory, exist_ok=True)
@@ -32,11 +32,13 @@ def move_music_files_to_archive(directory, archive_directory='/mnt/data/midi_mus
                 print(f"Error archiving {source_file_path} to {destination_file_path}: {e}")
 
 
-def process_and_output_score(parts_data, score_data, musicxml_path='/mnt/data/song_musicxml.xml',
-                             midi_path='/mnt/data/song_midi.mid', show_html=True, sheet_music_html_path='/mnt/data/sheet_music.html'):
+def process_and_output_score(parts_data, score_data, musicxml_path='./output/song_musicxml.xml',
+                             midi_path='./output/song_midi.mid', show_html=True, sheet_music_html_path='/mnt/data/sheet_music.html'):
     try:
         directory = os.path.dirname(musicxml_path)
         move_music_files_to_archive(directory)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
     except Exception as e:
         print("failed to archive old files")
 
@@ -314,6 +316,7 @@ def process_and_output_score(parts_data, score_data, musicxml_path='/mnt/data/so
 
     # Write the score to MusicXML and MIDI files
     score.write('musicxml', fp=musicxml_path)
+    #score.write('musicxml.pdf', fp='./output/song_score.pdf')
     score.write('midi', fp=midi_path)
 
     print("Fix warning or error messages printed above next time. If Any.")
@@ -322,7 +325,8 @@ def process_and_output_score(parts_data, score_data, musicxml_path='/mnt/data/so
     #
     try:
         if show_html:
-            score.show('osmd')
+            #score.show('osmd')
+            score.show('musicxml')  # OS에 따라 기본 MusicXML 뷰어 (MuseScore 등)로 열림
     except:
         pass
 

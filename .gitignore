@@ -1,0 +1,17 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# OS metadata
+.DS_Store
+
+# Music & Score output
+*.mid
+*.xml
+*.musicxml
+*.pdf
+
+# Output folders
+output/
+sandbox/
+mnt/
