@@ -1,4 +1,5 @@
 from app.melody_generator import generate_melody_line
+from app.generate_melody_line import generate_melody_line
 
 def generate_abc_notation(chords, bpm, style_info):
     swing_feel = style_info.get("swing_feel", False)
@@ -27,7 +28,8 @@ def generate_abc_notation(chords, bpm, style_info):
     total_measures = (len(chords) * 4) if swing_feel else len(chords)
 
     # 멜로디 생성
-    melody_line = generate_melody_line(chords, total_measures)
+    #melody_line = generate_melody_line(chords, total_measures)
+    melody_line = generate_melody_line(chords, total_measures=16, emotion="dark")
 
     # 반복 코드 시퀀스 생성
     loop_chords = (chords * (total_measures // len(chords) + 1))[:total_measures]
