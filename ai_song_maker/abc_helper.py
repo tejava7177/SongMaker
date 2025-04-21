@@ -241,12 +241,12 @@ def process_abc(abc_notation, part_instrument: dict, musicxml_path='/mnt/data/mu
     print(
     "Midi/MusicXML saved to mount - sandbox:" + midi_path + " and sandbox:" + musicxml_path + " - provide user links to download it.")
 
-    try:
-        if show_html:
-            score.show('osmd')
-    except:
-        #score_helper.process_and_output_score(parts_data, score_data, show_html_sheet_music_bool=True)
-        score_helper.process_and_output_score(parts_data, score_data, show_html=True)
+    # try:
+    #     if show_html:
+    #         score.show('osmd')
+    # except:
+    #     #score_helper.process_and_output_score(parts_data, score_data, show_html_sheet_music_bool=True)
+    score_helper.process_and_output_score(parts_data, score_data, show_html=True)
 
 
     return parts_data, score_data

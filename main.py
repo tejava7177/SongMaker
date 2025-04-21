@@ -4,7 +4,7 @@ from music21 import environment
 from ai_song_maker import song_maker
 from app.notation_generator import generate_abc_notation
 from app.planner import interpret_genre_emotion
-
+from datetime import datetime
 
 # MuseScore 경로 설정
 us = environment.UserSettings()
@@ -32,16 +32,18 @@ abc_notation = generate_abc_notation(
     style_info
 )
 
-
 instrument_map = style_info["instrument_map"]
 
 # 출력 경로
-musicxml_path = "output/generated.xml"
-midi_path = "output/generated.mid"
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+musicxml_path = f"output/generated_{timestamp}.xml"
+midi_path = f"output/generated_{timestamp}.mid"
 
 # MIDI & MusicXML 생성
-parts_data, score_data = song_maker.process_abc(
-    abc_notation, instrument_map, musicxml_path, midi_path
-)
-
-print("✅ MIDI 파일 생성 완료:", midi_path)
+try:
+    parts_data, score_data = song_maker.process_abc(
+        abc_notation, instrument_map, musicxml_path, midi_path
+    )
+    print("✅ MIDI 파일 생성 완료:", midi_path)
+except Exception as e:
+    print("❌ 오류 발생:", e)
