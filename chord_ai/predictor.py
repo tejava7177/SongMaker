@@ -3,15 +3,16 @@
 
 
 # 📄 File: chord_ai/predictor.py
+# 📄 File: chord_ai/predictor.py
 
 import numpy as np
 import tensorflow as tf
 import os
 
-# ✅ 경로 설정 (상위에서 상대경로로 불러올 수 있도록 처리)
+# ✅ 경로 설정
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "model/lstm_chord_model4.h5")
-CHORD_MAP_PATH = os.path.join(BASE_DIR, "model/chord_to_index.npy")
+MODEL_PATH = "/Users/simjuheun/Desktop/myProject/SongMaker/model/lstm_chord_model5_best.h5"
+CHORD_MAP_PATH = "/Users/simjuheun/Desktop/myProject/SongMaker/model/chord_to_index.npy"
 
 # ✅ 모델과 코드 매핑 로드
 model = tf.keras.models.load_model(MODEL_PATH)
