@@ -10,8 +10,12 @@ __pycache__/
 *.xml
 *.musicxml
 *.pdf
+*.npy
+*.h5
 
 # Output folders
 output/
 sandbox/
 mnt/
+model/
+midi/
