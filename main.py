@@ -5,6 +5,7 @@ from chord_ai.style_converter import apply_style, clean_chord_format
 from chord_ai.genre_selector import run_genre_selection
 from chord_ai.emotion_selector import run_emotion_selection
 from chord_ai.instrument_selector import run_instrument_selection
+from chord_ai.bpm_selector import run_bpm_selection
 
 # 🎯 상태 초기화
 state = {
@@ -12,7 +13,8 @@ state = {
     "predicted": [],
     "genre": None,
     "emotion": None,
-    "instruments": None
+    "instruments": None,
+    "bpm": None
 }
 
 # ✅ 1단계: 코드 예측
@@ -23,6 +25,8 @@ state["genre"] = run_genre_selection()
 state["emotion"] = run_emotion_selection()
 # ✅ 4단계: 악기 설정
 state["instruments"] = run_instrument_selection()
+# ✅ 5단계: BPM 설정
+state["bpm"] = run_bpm_selection()
 
 
 # 🧼 포맷 정리
@@ -34,6 +38,7 @@ print("🎼 진행 코드:", " → ".join(state["seed"]))
 print("🎷 장르:", state["genre"] or "아직 선택되지 않음")
 print("🎭 감정:", state["emotion"] or "아직 선택되지 않음")
 print("🎹 악기:", ", ".join(state["instruments"]) if state["instruments"] else "아직 선택되지 않음")
+print("⏱️ BPM:", state["bpm"] if state.get("bpm") else "아직 선택되지 않음")
 
 # 🎵 예측 결과 출력
 print("\n🎼 AI가 예측한 코드 진행:")
