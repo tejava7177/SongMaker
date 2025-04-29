@@ -7,6 +7,9 @@ from chord_ai.emotion_selector import run_emotion_selection
 from chord_ai.instrument_selector import run_instrument_selection
 from chord_ai.bpm_selector import run_bpm_selection
 
+
+
+
 # 🎯 상태 초기화
 state = {
     "seed": [],
@@ -24,7 +27,7 @@ state["genre"] = run_genre_selection()
 # ✅ 3단계: 감정 설정
 state["emotion"] = run_emotion_selection()
 # ✅ 4단계: 악기 설정
-state["instruments"] = run_instrument_selection()
+state["instruments"] = run_instrument_selection(state["genre"])
 # ✅ 5단계: BPM 설정
 state["bpm"] = run_bpm_selection()
 
