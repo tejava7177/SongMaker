@@ -6,10 +6,9 @@ from chord_ai.genre_selector import run_genre_selection
 from chord_ai.emotion_selector import run_emotion_selection
 from chord_ai.instrument_selector import run_instrument_selection
 from chord_ai.bpm_selector import run_bpm_selection
+from song_maker import process_user_request
 
-
-
-
+# -----------------------------------------------------
 # 🎯 상태 초기화
 state = {
     "seed": [],
@@ -20,29 +19,36 @@ state = {
     "bpm": None
 }
 
-# ✅ 1단계: 코드 예측
+# -----------------------------------------------------
+# ✅ 사용자 입력 단계
 state["seed"], state["predicted"] = run_chord_prediction()
-# ✅ 2단계: 장르 설정
 state["genre"] = run_genre_selection()
-# ✅ 3단계: 감정 설정
 state["emotion"] = run_emotion_selection()
-# ✅ 4단계: 악기 설정
 state["instruments"] = run_instrument_selection(state["genre"])
-# ✅ 5단계: BPM 설정
 state["bpm"] = run_bpm_selection()
 
-
+# -----------------------------------------------------
 # 🧼 포맷 정리
 formatted = [clean_chord_format(ch) for ch in state["predicted"]]
 
-# 📋 진행 상황 출력
+# 📋 사용자 입력 요약 출력
 print("\n📋 현재 설정 상태:")
 print("🎼 진행 코드:", " → ".join(state["seed"]))
-print("🎷 장르:", state["genre"] or "아직 선택되지 않음")
-print("🎭 감정:", state["emotion"] or "아직 선택되지 않음")
-print("🎹 악기:", ", ".join(state["instruments"]) if state["instruments"] else "아직 선택되지 않음")
-print("⏱️ BPM:", state["bpm"] if state.get("bpm") else "아직 선택되지 않음")
+print("🎷 장르:", state["genre"])
+print("🎭 감정:", state["emotion"])
+print("🎹 악기:", ", ".join(state["instruments"]))
+print("⏱️ BPM:", state["bpm"])
 
-# 🎵 예측 결과 출력
+# 🎵 코드 예측 출력
 print("\n🎼 AI가 예측한 코드 진행:")
 print(" → ".join(formatted))
+
+# -----------------------------------------------------
+# 🎼 MIDI & 악보 생성
+abc_code, midi_path, xml_path = process_user_request(state)
+
+# ✅ 결과 출력
+if abc_code:
+    print("\n🎉 모든 프로세스 완료! 음악 생성 성공!")
+else:
+    print("⚠️ 음악 생성에 실패했습니다.")
