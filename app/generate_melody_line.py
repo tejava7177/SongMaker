@@ -1,7 +1,7 @@
 # 📄 File: app/generate_melody_line.py
 
 import random
-from chord.chord_map import CHORD_TO_NOTES
+from chord.chord_notes import CHORD_TO_NOTES
 
 def format_note(note: str, octave: int = 1) -> str:
     """노트를 ABC 표기법으로 변환"""

@@ -1,6 +1,3 @@
-# 음원 생성 (ABC + MIDI)
-
-
 from app.generate_melody_line import generate_melody_line
 
 # General MIDI 프로그램 넘버 매핑
@@ -45,7 +42,7 @@ def generate_abc_notation(chords: list, bpm: int, style_info: dict) -> str:
     # 🎵 감정 기반 멜로디 라인 생성
     melody_line = generate_melody_line(chords, total_measures=total_measures, emotion=emotion)
 
-    # 코드 반복 시퀀스 (리듬 트랙, 베이스 트랙에 사용)
+    # 코드 반복 시퀀스
     loop_chords = (chords * (total_measures // len(chords) + 1))[:total_measures]
 
     if swing_feel:
@@ -57,27 +54,39 @@ def generate_abc_notation(chords: list, bpm: int, style_info: dict) -> str:
         v1_lines = ''.join([f'| "{chord}"c\'2 z2 ' for chord in loop_chords])
         v2_lines = ''.join([f'| "{chord}"C,2 G,2 ' for chord in loop_chords])
 
-    return f"""
+    if not v1_lines.strip() or not v2_lines.strip() or not melody_line.strip():
+        raise ValueError("❌ ABC 코드 생성 실패: 멜로디 또는 리듬 파트가 비어 있음")
+
+    print("🎼 Melody:", melody_line)
+    print("🎼 V1:", v1_lines)
+    print("🎼 V2:", v2_lines)
+
+    return f"""X:1
+T:AI Composition
+%%score (V1 V2 V3)
 M:4/4
 L:{rhythm_unit}
 Q:1/4={bpm}
 K:C
 
-V:1 clef=treble name="{v1_name}"
+V:V1 name="{v1_name}" clef=treble
 %%MIDI program {v1_prog}
+%%MIDI channel 1
 
-V:2 clef=bass name="{v2_name}"
+V:V2 name="{v2_name}" clef=bass
 %%MIDI program {v2_prog}
+%%MIDI channel 2
 
-V:3 clef=treble name="Melody"
+V:V3 name="Melody" clef=treble
 %%MIDI program 74
+%%MIDI channel 3
 
-V:1
+V:V1
 {v1_lines}
 
-V:2
+V:V2
 {v2_lines}
 
-V:3
+V:V3
 {melody_line}
 """
