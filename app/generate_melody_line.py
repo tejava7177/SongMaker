@@ -52,7 +52,7 @@ def generate_melody_line(chords: list, total_measures: int = 16, emotion: str = 
                 octave = 1
 
             note_abc = format_note(note, octave)
-            bar_notes.append(note_abc)
+            bar_notes.append(f"{note_abc}/")
 
         # 🎼 한 마디 완성
         melody += f'| "{chord}" ' + " ".join(bar_notes) + " "

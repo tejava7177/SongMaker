@@ -326,10 +326,10 @@ def process_and_output_score(parts_data, score_data, musicxml_path='./output/son
     score.write('midi', fp=midi_path)
 
     # 🎁 PDF 악보 저장 추가
-    pdf_path = './output/song_score.pdf'
-    score.write('musicxml.pdf', fp=pdf_path)
+    #pdf_path = './output/song_score.pdf'
+    #score.write('musicxml.pdf', fp=pdf_path)
 
-    print(f"🎼 PDF 악보 저장됨: {pdf_path}")
+    #print(f"🎼 PDF 악보 저장됨: {pdf_path}")
 
     print("Fix warning or error messages printed above next time. If Any.")
     print("Ask user for feedback or to continue on with the next section (if applicable).")

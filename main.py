@@ -59,8 +59,8 @@ ordered_instruments = {
 
 # 출력 경로
 os.makedirs("output", exist_ok=True)
-xml_path = os.path.join("output", "generated.musicxml")
-midi_path = os.path.join("output", "generated.mid")
+xml_path = os.path.join("output", "generated123.musicxml")
+midi_path = os.path.join("output", "generated123.mid")
 
 # -----------------------------------------------------
 # 🎶 MIDI 생성
