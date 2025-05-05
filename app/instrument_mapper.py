@@ -30,9 +30,11 @@ USER_ALIAS_TO_INTERNAL = {
 INTERNAL_TO_MUSIC21 = {
     "Acoustic Grand Piano": "Piano",
     "Electric Guitar (distortion)": "Distortion Guitar",
+    "Electric Guitar (distortion)": "Distorted Guitar",  # ✅ 정확한 music21 이름
     "Electric Bass (fingered)": "Electric Bass",
     "Flute": "Flute",
     "Percussion": "Percussion",
+    "Percussion": "Unpitched Percussion",
     "Acoustic Bass": "Acoustic Bass",
     "Drawbar Organ": "Organ",
     "Synth Strings 1": "String Ensemble 1",
