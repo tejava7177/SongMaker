@@ -1,14 +1,17 @@
 # 📄 File: app/patterns/piano.py
 
-def generate_piano_comping(chords, genre="jazz", emotion="romantic"):
-    """
-    코드 진행과 스타일 정보에 따라 피아노 컴핑 리듬 패턴 생성
-    반환값: ABC 노테이션 문자열
-    """
-    if genre == "jazz" and emotion == "romantic":
-        return _jazz_romantic_pattern(chords)
-    else:
-        return _default_block_chords(chords)
+
+def generate_piano_comping(chords: list, genre: str, emotion: str, swing: bool = False) -> str:
+    patterns = []
+    for chord in chords:
+        if swing:
+            # 🎵 스윙: 쿼터-셋잇단 feel (long-short pattern)
+            bar = f'| "{chord}"c\'3/ c\'/ c\'3/ c\'/ '
+        else:
+            # 🎵 일반: 균등한 8분음표
+            bar = f'| "{chord}"c\' z c\' z c\' z c\' z '
+        patterns.append(bar)
+    return ''.join(patterns)
 
 
 def _jazz_romantic_pattern(chords):

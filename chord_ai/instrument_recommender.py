@@ -1,8 +1,8 @@
 # 📄 File: chord_ai/instrument_recommender.py
 
 genre_instrument_recommendations = {
-    "jazz": ["Piano", "Bass", "Saxophone", "Trumpet", "Drums"],
-    "blues": ["Guitar", "Piano", "Bass", "Organ", "Drums"],
+    "jazz": ["Piano", "Guitar", "Bass", "Saxophone", "Trumpet", "Drums"],
+    "blues": ["Guitar", "Piano", "Bass", "Organ", "Trumpet", "Saxophone","Drums"],
     "rock": ["Guitar", "Bass", "Synth", "Piano", "Drums"],
     "punk": ["Guitar", "Bass", "Synth", "Drums"],
     "rnb": ["Piano", "Bass", "Strings", "Synth", "Drums"]

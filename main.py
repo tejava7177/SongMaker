@@ -41,12 +41,12 @@ print(" → ".join(chords))
 
 # ---------------------------------------------------
 # 🎨 스타일 해석 및 ABC 코드 생성
-style_info = interpret_genre_emotion(genre, emotion, instruments)
+style_info = interpret_genre_emotion(genre, emotion, instruments, bpm)
 abc_code, ordered_internal_instruments = generate_structured_abc_notation(chords, bpm, style_info)
 
 # ---------------------------------------------------
 # 🎹 music21 악기 매핑
-ordered_instruments = resolve_all(instruments)
+ordered_instruments = resolve_all(instruments, genre)
 
 # ---------------------------------------------------
 # 💾 출력 경로 생성
@@ -58,6 +58,7 @@ midi_path = os.path.join("output", f"song_{timestamp}.mid")
 # ---------------------------------------------------
 # 🎶 음원 생성
 parts_data, score_data = song_maker.process_abc(abc_code, ordered_instruments, xml_path, midi_path)
+
 
 # ---------------------------------------------------
 # ✅ 결과 출력
