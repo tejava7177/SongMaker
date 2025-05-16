@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
+from desktop_app.tuner_view import TunerView
 
 class SongMakerApp:
     def __init__(self, root):
@@ -24,12 +25,21 @@ class SongMakerApp:
         subtitle_label.pack(pady=(0, 30))
 
         # 시작 버튼
-        start_button = ttk.Button(self.root, text="▶ 시작하기", command=self.open_main_interface)
-        start_button.pack()
+        start_button = ttk.Button(self.root, text="▶ 코드 생성 시작하기", command=self.open_main_interface)
+        start_button.pack(pady=10)
+
+        # 튜너로 이동 버튼
+        tuner_button = ttk.Button(self.root, text="🎵 기타 튜닝하기", command=self.open_tuner_view)
+        tuner_button.pack(pady=10)
 
     def open_main_interface(self):
-        # 이후 실제 UI 연결 예정
-        tk.messagebox.showinfo("준비 중", "기능 연결 예정입니다. 다음 화면 개발 중!")
+        messagebox.showinfo("준비 중", "코드 생성 기능은 다음 단계에서 구성됩니다.")
+
+    def open_tuner_view(self):
+        tuner_window = tk.Toplevel(self.root)
+        tuner_window.title("기타 튜너")
+        tuner_window.geometry("500x400")
+        TunerView(tuner_window)
 
 
 if __name__ == "__main__":
