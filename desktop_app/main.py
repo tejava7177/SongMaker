@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from desktop_app.tuner_view import TunerView
 from desktop_app.chord_input_view import ChordInputView
+from desktop_app.style_selection_view import StyleSelectionView
 
 class SongMakerApp:
     def __init__(self, root):
@@ -42,12 +43,24 @@ class SongMakerApp:
     def handle_chords(self, chords):
         print("입력된 코드 진행:", chords)
         messagebox.showinfo("입력 확인", f"입력된 코드 진행: {', '.join(chords)}")
+        self.open_style_selection_view()  # ⬅ 자동 연결 추가
 
     def open_tuner_view(self):
         tuner_window = tk.Toplevel(self.root)
         tuner_window.title("기타 튜너")
         tuner_window.geometry("500x400")
         TunerView(tuner_window)
+
+    def open_style_selection_view(self):
+        style_window = tk.Toplevel(self.root)
+        style_window.title("스타일 선택")
+        style_window.geometry("500x600")
+        StyleSelectionView(style_window, self.handle_style_selection)
+
+    def handle_style_selection(self, style_data):
+        print("선택된 스타일 정보:", style_data)
+        messagebox.showinfo("선택 확인",
+                            f"장르: {style_data['genre']}\\n감정: {style_data['emotion']}\\n악기: {', '.join(style_data['instruments'])}")
 
 if __name__ == "__main__":
     root = tk.Tk()
