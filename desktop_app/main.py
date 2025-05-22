@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from desktop_app.tuner_view import TunerView
+from desktop_app.chord_input_view import ChordInputView
 
 class SongMakerApp:
     def __init__(self, root):
@@ -25,22 +26,28 @@ class SongMakerApp:
         subtitle_label.pack(pady=(0, 30))
 
         # 시작 버튼
-        start_button = ttk.Button(self.root, text="▶ 코드 생성 시작하기", command=self.open_main_interface)
+        start_button = ttk.Button(self.root, text="▶ 코드 생성 시작하기", command=self.open_chord_input_view)
         start_button.pack(pady=10)
 
         # 튜너로 이동 버튼
         tuner_button = ttk.Button(self.root, text="🎵 기타 튜닝하기", command=self.open_tuner_view)
         tuner_button.pack(pady=10)
 
-    def open_main_interface(self):
-        messagebox.showinfo("준비 중", "코드 생성 기능은 다음 단계에서 구성됩니다.")
+    def open_chord_input_view(self):
+        chord_window = tk.Toplevel(self.root)
+        chord_window.title("코드 입력")
+        chord_window.geometry("600x300")
+        ChordInputView(chord_window, self.handle_chords)
+
+    def handle_chords(self, chords):
+        print("입력된 코드 진행:", chords)
+        messagebox.showinfo("입력 확인", f"입력된 코드 진행: {', '.join(chords)}")
 
     def open_tuner_view(self):
         tuner_window = tk.Toplevel(self.root)
         tuner_window.title("기타 튜너")
         tuner_window.geometry("500x400")
         TunerView(tuner_window)
-
 
 if __name__ == "__main__":
     root = tk.Tk()
