@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from desktop_app.tuner_view import TunerView
 from desktop_app.chord_input_view import ChordInputView
+from desktop_app.chord_input_mode_view import ChordInputModeView
+from desktop_app.chord_from_guitar_view import ChordFromGuitarView
 from desktop_app.style_selection_view import StyleSelectionView
 
 class SongMakerApp:
@@ -27,7 +29,7 @@ class SongMakerApp:
         subtitle_label.pack(pady=(0, 30))
 
         # 시작 버튼
-        start_button = ttk.Button(self.root, text="▶ 코드 생성 시작하기", command=self.open_chord_input_view)
+        start_button = ttk.Button(self.root, text="▶ 코드 생성 시작하기", command=self.open_chord_input_mode_view)
         start_button.pack(pady=10)
 
         # 튜너로 이동 버튼
@@ -39,6 +41,23 @@ class SongMakerApp:
         chord_window.title("코드 입력")
         chord_window.geometry("600x300")
         ChordInputView(chord_window, self.handle_chords)
+
+    def open_chord_input_mode_view(self):
+        window = tk.Toplevel(self.root)
+        window.title("입력 방식 선택")
+        window.geometry("400x300")
+
+        ChordInputModeView(
+            window,
+            on_text_mode=self.open_chord_input_view,
+            on_guitar_mode=self.open_chord_from_guitar_view  # 이건 다음 단계에서 만들 예정
+        )
+
+    def open_chord_from_guitar_view(self):
+        window = tk.Toplevel(self.root)
+        window.title("기타로 코드 입력")
+        window.geometry("500x500")
+        ChordFromGuitarView(window, self.handle_chords)
 
     def handle_chords(self, chords):
         print("입력된 코드 진행:", chords)
