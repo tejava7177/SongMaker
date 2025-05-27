@@ -29,4 +29,10 @@ class HomeScreen(ttk.Frame):
             self,
             text="🎨 스타일 선택 화면만 보기",
             command=lambda: self.controller.show_frame_by_name("StyleSelectionView")
+        ).pack(pady=10, ipadx=10, ipady=5)
+
+        ttk.Button(
+            self,
+            text="🔧 튜너 보기",
+            command=lambda: self.controller.show_frame_by_name("TunerView")
         ).pack(pady=20, ipadx=10, ipady=5)

@@ -4,9 +4,7 @@ from desktop_Main_app.view.home_screen import HomeScreen
 from desktop_Main_app.view.chordInputView import ChordInputView
 from desktop_Main_app.view.chordFromGuitarView import ChordFromGuitarView
 from desktop_Main_app.view.styleSelectionView import StyleSelectionView
-
-
-
+from desktop_Main_app.view.tuner_view import TunerView
 
 class SongMakerApp:
     def __init__(self, root):
@@ -25,6 +23,7 @@ class SongMakerApp:
             "ChordInputView": ChordInputView,
             "ChordFromGuitarView": ChordFromGuitarView,
             "StyleSelectionView": StyleSelectionView,
+            "TunerView": TunerView
         }
 
         for name, PageClass in self.page_classes.items():
