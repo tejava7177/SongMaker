@@ -57,7 +57,7 @@ class SongMakerApp:
         window = tk.Toplevel(self.root)
         window.title("기타로 코드 입력")
         window.geometry("500x500")
-        ChordFromGuitarView(window, self.handle_chords)
+        ChordFromGuitarView(window)
 
     def handle_chords(self, chords):
         print("입력된 코드 진행:", chords)
